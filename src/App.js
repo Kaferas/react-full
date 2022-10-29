@@ -1,22 +1,29 @@
-import './App.css';
+import "./App.css";
+import Header from "./components/Header";
+import FeedBackList from "./components/FeedBackList";
+import FeedBackData from "./data/FeedBackData"
+import FeedBackStats from "./components/FeedBackStats"
+import FeedBackForm from "./components/FeedBackForm"
 import {useState} from "react"
 
 function App() {
-const [colored, setColor] = useState("#0000b2")
+  const [feedBackData,setFeedBackData]=useState(FeedBackData)
+ 
+  const deleteItem=(id)=>{
+    if(window.confirm("Are you sure you want to Delete?")){
+      setFeedBackData(feedBackData.filter((item)=>{
+       return item.id !== id
+      }));
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <p style={{color:colored}}>
-          {
-             setInterval(()=>{
-              setColor("#"+
-                Math.floor(Math.random()*16777215).toString(16)
-              )
-            },3000)
-          }
-          This Kaferas Your Instructor Of Everyday
-        </p>
-      </header>
+    <div >
+        <Header bgColor="black" textColor="pink" />
+        <div className="container">
+          <FeedBackForm/>
+          <FeedBackStats feedBackData={feedBackData} />
+         < FeedBackList feedback={feedBackData} handleDelete={deleteItem}/>
+        </div>
     </div>
   );
 }
