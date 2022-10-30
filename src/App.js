@@ -1,10 +1,12 @@
 import "./App.css";
 import {v4 as uuidv4} from "uuid"
+import {BrowserRouter as Router,Route, Routes} from "react-router-dom"
 import Header from "./components/Header";
 import FeedBackList from "./components/FeedBackList";
 import FeedBackData from "./data/FeedBackData"
 import FeedBackStats from "./components/FeedBackStats"
 import FeedBackForm from "./components/FeedBackForm"
+import AboutPage from "./pages/AboutPage"
 import {useState} from "react"
 
 function App() {
@@ -21,14 +23,24 @@ function App() {
     }
   }
   return (
-    <div >
+    <Router>
+      <div >
         <Header bgColor="black" textColor="pink" />
         <div className="container">
-          <FeedBackForm handleAdd={addFeedBack}/>
-          <FeedBackStats feedBackData={feedBackData} />
-         < FeedBackList feedback={feedBackData} handleDelete={deleteItem}/>
+          <Routes>
+            <Route exact path="/" element={
+              <>
+                <FeedBackForm handleAdd={addFeedBack}/>
+                <FeedBackStats feedBackData={feedBackData} />
+                < FeedBackList feedback={feedBackData} handleDelete={deleteItem}/>
+              </>
+            }>
+            </Route>
+          <Route path="/about" element={<AboutPage/>} />
+          </Routes>
         </div>
-    </div>
+      </div>
+    </Router>
   );
 }
 

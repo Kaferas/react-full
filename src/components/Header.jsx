@@ -4,6 +4,7 @@ function Header({text,bgColor,textColor}) {
     const styleSheet={
         backgroundColor:bgColor,
         color:textColor,
+        fontWeight:'bold'
       }
   return (
     <header >
