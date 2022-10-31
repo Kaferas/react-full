@@ -40,7 +40,8 @@ const handleTextChange=(e)=>{
     <Card>
         <form onSubmit={submitHandle}>
         <h2>How would you Rate your Service with us?</h2>
-        <RatingSelect select={(rating)=>setRating(rating)}/>
+        <RatingSelect select={
+            (rating)=>setRating(rating)}/>
         <div className="input-group">
             <input placecholder="Write Here your Review" value={text} type="text" onChange={handleTextChange}/>
             <Button version='primary' type='submit' isDisabled={btnDisabled}>Send</Button>
