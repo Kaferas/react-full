@@ -1,15 +1,23 @@
-import React,{useState} from 'react'
+import React,{useState,useContext,useEffect} from 'react'
 import Card from "../shared/Card"
 import Button from "../shared/Button"
 import RatingSelect from "./RatingSelect"
+import FeedBackContext from '../context/FeedBackContext'
 
-function FeedBackForm({handleAdd}) {
-
+function FeedBackForm() {
+const {addFeedBack,editFeed,updateFeedBack}= useContext(FeedBackContext)
 const [text,setText]=useState("");
 const [rating,setRating]=useState(1);
 const [btnDisabled,setBtnDisabled]=useState(true);
 const [message,setMessage]=useState('');
 
+useEffect(()=>{
+    if(editFeed.edit){
+        setBtnDisabled(true)
+        setText(editFeed.item.text)
+        setRating(editFeed.item.rating)
+    }
+},[editFeed])
 const handleTextChange=(e)=>{
         setText(e.target.value);      
         if(text === ''){
@@ -31,7 +39,11 @@ const handleTextChange=(e)=>{
                 text,
                 rating
             };
-            handleAdd(postFeed)
+            if(editFeed.edit){
+                updateFeedBack(editFeed.item.id,postFeed)
+            }else{
+                addFeedBack(postFeed)
+            }
             setText("")
             setRating(1)
         }
