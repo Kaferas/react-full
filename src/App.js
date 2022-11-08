@@ -2,12 +2,14 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/layouts/Header';
 import Footer from './components/layouts/Footer';
-import About from './components/pages/About';
 import Home from './components/pages/Home';
+import About from './components/pages/About';
 import NotFound from './components/pages/NotFound';
+import {GithubProvider} from './components/context/github/GithubContext';
 
 function App() {
   return (
+    <GithubProvider>
    <Router>
       <div className='flex flex-col justify-between h-screen'>
         <Header/>
@@ -22,6 +24,7 @@ function App() {
         <Footer/>
       </div>
    </Router>
+    </GithubProvider>
   );
 }
 
